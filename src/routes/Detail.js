@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Detail() {
   const { id } = useParams();
@@ -14,7 +14,20 @@ function Detail() {
     getMovie();
   }, []);
   console.log(movieDetail);
-  return <div>Detail</div>;
+  return (
+    <div>
+      <img src={movieDetail.large_cover_image} />
+      <h2>
+        {movieDetail.title} ({movieDetail.year})
+      </h2>
+      <ul>
+        {movieDetail.genres &&
+          movieDetail.genres.map((g) => <li key={g}>{g}</li>)}
+      </ul>
+      <h3>runtime : {movieDetail.runtime}minute</h3>
+      <p>{movieDetail.description_full}</p>
+    </div>
+  );
 }
 
 export default Detail;
